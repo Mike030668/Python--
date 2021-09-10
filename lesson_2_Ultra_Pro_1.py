@@ -1,6 +1,7 @@
 import random
 attempt = 0
 chances = 10
+
 print('Начнем игру угадай число?')
 play = input('если да, то поставь + или - :')
 
