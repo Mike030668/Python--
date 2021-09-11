@@ -1,7 +1,7 @@
 import random
 
 attempt = 0
-chances = 10
+chances = 7
 bord1 = 0
 bord2 = 100
 
@@ -19,14 +19,14 @@ if play == '+':
 
     while attempt < chances:
         try:
-            number = random.randint(bord1, bord2)
-            # print(bord1-1, bord2+1)
+            number = random.randint(bord1, bord2 + 1)
+            # print(bord1, bord2)
         except:
             answer = '!'
             break
         print('Я говорю ' + str(number))
         check_answ = False
-        while check_answ != True:
+        while not check_answ:
             answer = input('Ну как оно? - ')
             if answer in ('>', '<', '='):
                 check_answ = True
@@ -42,16 +42,18 @@ if play == '+':
             break
 
     if answer == '=': print('Отлично! Число угадано с ' + str(attempt) + ' раз')
-    if answer == '!':
-        print('Где-то ты ошибся!')
     else:
-        real_answ = input('Упс, я пролет, а какое число было загадано ?')
-        check_lst = range(bord1, bord2)
-        # print(bord1-1, bord2+1)
-        if int(real_answ) in check_lst:
-            print('Все верно, ты выиграл')
-        else:
+        if answer == '!':
+            # print(bord1, bord2)
             print('Где-то ты ошибся!')
+        else:
+            real_answ = input('Упс, я пролет, а какое число было загадано ?')
+            check_lst = range(bord1, bord2+1)
+            # print([i for i in check_lst])
+            if int(real_answ) in check_lst:
+                print('Все верно, ты выиграл')
+            else:
+                print('Где-то ты ошибся!')
 
 else:
     print('Жаль, что ты сегодня не в духе ((')
