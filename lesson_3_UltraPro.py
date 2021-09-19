@@ -47,19 +47,19 @@ specil = ('один', 'две', 'три', 'четыр', 'пять',
 
 
 step = input('Давай сыграем в Викторину, поставь + если готов'+ ': ')
-if step=='+':
+if step == '+':
     print('ОК! Вводи дни рождения называемых мной знаменитостей в формате dd.mm.yyyy ')
     good_answ = 0 # счетчик верных ответов
     bad_answ = 0  # счетчик неверных ответов
     for chel in fam_bthd.keys():
-        # контроль кооректности ввода
+        # контроль корректности ввода
         check_form = False
-        while check_form != True:
+        while not check_form:
             # получаем ответ
             step = input('День рождения ' + chel + ': ').split('.')
-            # сверка соответствияя формату
-            if len(step)==3 and \
-            (len(step[0])==2 and len(step[1])==2 and len(step[2])==4):
+            # сверка соответствия формату
+            if len(step) == 3 and \
+            (len(step[0]) == 2 and len(step[1]) == 2 and len(step[2]) == 4):
                 check_form = True # выход если верно
             else: print('введено не в формате dd.mm.yyyy')
 
@@ -67,9 +67,9 @@ if step=='+':
         bithday = fam_bthd[chel].split('.')
         for i in range(len(step)):
           if bithday[i] == step[i]: check+=1
-        if check == 3: good_answ+=1 # если счетчик 3, ответ верен и плюсуем
+        if check == 3: good_answ += 1 # если счетчик 3, ответ верен и плюсуем
         else:
-            bad_answ+=1 # если счетчик не 3, ответ неверен и плюсуем
+            bad_answ += 1 # если счетчик не 3, ответ неверен и плюсуем
             # получаем индекс месяца, убрав 0 если есть
             idx = int(bithday[1].strip('0'))-1
 
