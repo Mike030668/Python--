@@ -1,6 +1,5 @@
 import random
 
-
 def rand_dictionary(dic, k):
     """
   функция создает случайный словарь
@@ -65,8 +64,8 @@ def start_play(n=5):
 
     if step == '+':
         print('ОК! Вводи дни рождения называемых мной знаменитостей в формате dd.mm.yyyy ')
-        ready = True
-        while True:
+        ready2play = True
+        while ready2play:
             rand_fam_bthd = rand_dictionary(fam_bthd, n)  # формируем случайный словарь
             good_answ = 0  # счетчик верных ответов
             bad_answ = 0  # счетчик неверных ответов
@@ -123,7 +122,7 @@ def start_play(n=5):
                 print('---------------------------------------------')
                 print()
                 print('Спасибо за игру, до новых встреч!')
-                ready = False
+                ready2play = False
     else:
         print('Жаль, что ты сегодня не в духе ((')
 
