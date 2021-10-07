@@ -32,10 +32,10 @@ def victorina():
         for chel in fam_bthd.keys():
             # контроль кооректности ввода
             check_form = False
-            while check_form != True:
+            while not check_form:
                 # получаем ответ
                 step = input('День рождения ' + chel + ': ').split('.')
-                # сверка соответствияя формату
+                # сверка соответствия формату
                 if len(step) == 3 and \
                         (len(step[0]) == 2 and len(step[1]) == 2 and len(step[2]) == 4):
                     check_form = True  # выход если верно
