@@ -4,12 +4,12 @@ import pymorphy2
 # загружаем архив
 file_path = 'https://drive.google.com/file/d/15fBsTB1ZU_BzEw5SJmlOMX2uuyi1xN1-/view?usp=sharing'
 file_id = str(file_path.split('/')[5:-1][0])
-name_file = '../text.txt'
+name_file = 'text.txt'
 gdown.download('https://drive.google.com/uc?id=' + file_id, name_file, quiet=False)
 
 
 # Считать/скопировать текст из файла
-f = open('../text.txt').readlines()
+f = open('text.txt').readlines()
 print(f)
 
 text = ''

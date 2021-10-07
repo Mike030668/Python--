@@ -10,7 +10,7 @@ import gdown
 # загружаем архив
 file_path = 'https://drive.google.com/file/d/1pKGu-u2Vvtx4xK8i2ZhOzE5rBXyO4qd8/view'
 file_id = str(file_path.split('/')[5:-1][0])
-name_file = '../text.txt'
+name_file = '../Lesson 3/text.txt'
 gdown.download('https://drive.google.com/uc?id=' + file_id, name_file, quiet=False)
 
 # Считать/скопировать текст из файла

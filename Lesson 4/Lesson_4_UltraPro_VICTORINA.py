@@ -1,6 +1,6 @@
 # Викторина
 
-def victorina():
+def victorina_first():
     step = input('Давай сыграем в Викторину, поставь + если готов' + ': ')
 
     # словарь знаменитостей
@@ -78,4 +78,4 @@ def victorina():
         print('Жаль, что ты сегодня не в духе ((')
 
 
-victorina()
+victorina_first()
