@@ -11,14 +11,21 @@ def rand_dictionary(dic, k):
            или размера исходного при k более
            размера исходного
   """
+    # формируем случайные индексы случайного словаря
     if k < len(dic):
         rand_idx = random.sample(range(len(dic)), k)
     else:
         rand_idx = random.sample(range(len(fam_bthd)), len(fam_bthd))
+
+    # получаем ключи и значения исходного словаря
     keys = list(dic.keys())
     values = list(dic.values())
+
+    # формируем случайные  ключи и значения к ним
     rand_values = [el for i, el in enumerate(values) if i in rand_idx]
     rand_keys = [el for i, el in enumerate(keys) if i in rand_idx]
+
+    # выводим случайный словарь
     return dict(zip(rand_keys, rand_values))
 
 
@@ -29,7 +36,7 @@ def start_play(n=5):
     """
     step = input('Давай сыграем в Викторину, поставь + если готов' + ': ')
 
-    # словарь знаменитостей
+    # словарь знаменитостей, можно наращивать
     fam_bthd = {'Константин Станиславский': '17.01.1863',
                 'Майя Булгакова': '19.05.1932',
                 'Сергей Бугаев': '28.03.1966',
