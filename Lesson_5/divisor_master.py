@@ -87,6 +87,7 @@ def simple_multipliers(n):
     return ans
 
 
+
 if __name__ == '__main__':
     n = 169
     simpleornot(n, 0)
