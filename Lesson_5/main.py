@@ -24,6 +24,7 @@ def test_function(fun, test_lst):
     return bad_values
 
 
+
 # тестовые наборы
 test_lst_1 = [random.randint(1, 100) for i in range(100)]
 test_lst_2 = [random.randrange(1, 100, 3)*(-1)**i for i in range(100)]
@@ -57,4 +58,5 @@ for fun in funlst:
     check = test_function(fun, mix_test)
     print(f'Значения дающие ошибку {check}')
     print()
+
 
