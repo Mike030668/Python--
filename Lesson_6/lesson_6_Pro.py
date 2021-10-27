@@ -14,6 +14,7 @@ names = ['Маша',
          ]
 
 def f(a, n):
+    global out
     if type(a) == list:
         out = []
         for i in range(n):
