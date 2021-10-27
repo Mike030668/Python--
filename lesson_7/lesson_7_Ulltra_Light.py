@@ -1,7 +1,5 @@
 import datetime
 
-from docxtpl import DocxTemplate
-from docxtpl import InlineImage
 from docx.shared import Cm
 from docxtpl import DocxTemplate, InlineImage
 
@@ -9,11 +7,13 @@ from docxtpl import DocxTemplate, InlineImage
 Работа с текстами
 """""
 
-def get_context(company, result_sku_list): # возвращает словарь аргуменов
+
+def get_context(company, result_sku_list):  # возвращает словарь аргуменов
     return {
         'retailer': company,
         'sku_list': result_sku_list,
     }
+
 
 def from_template(company, result_sku_list, template, signature):
     template = DocxTemplate(template)
@@ -31,13 +31,11 @@ def from_template(company, result_sku_list, template, signature):
 def generate_report(company, result_sku_list):
     template = 'report.docx'
     signature = 'Major.png'
-    document = from_template(company, result_sku_list, template, signature)
+    from_template(company, result_sku_list, template, signature)
 
 
 def toFixed(numObj, digits=0):
     return f"{numObj:.{digits}f}"
-
-
 
 
 car_data = ("""
@@ -49,7 +47,6 @@ car_data = ("""
 
 with open('data_text', 'w') as f:
     f.write(car_data.strip())
-
 
 # Считывание файла построчно
 f = open('data_text')
