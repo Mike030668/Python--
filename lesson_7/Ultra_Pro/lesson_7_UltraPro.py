@@ -1,11 +1,24 @@
 # from google.colab import output
+import json
+import time
+from datetime import datetime
 '''
-если не colab, то закомментировать запись выше 
+если не colab, то закомментировать запись выше
 и в коде output.clear() в нескольких местах!
 '''
 
+# получение текущей даты и времени для отчета
+def cur_time(x):
+    return str(datetime.fromtimestamp(int(x)))
+
+
 def privite_account():
-    balance = 1000
+    try:
+        with open('report_account.txt') as f:
+            balance = json.load(f)
+        balance = int(balance)
+    except:
+        balance = 0
     main_menu = ('пополнить счет', 'совершить покупку', 'история покупок', 'выход')
 
     appeals = {1: 'Добрый день',
@@ -21,10 +34,14 @@ def privite_account():
                3: 'Выход из меню, спасибо. До новых встреч!',
                4: 'Извините, пока нам больше нечего вам предложить, приходите в другой раз.'
                }
-
-    history = {}  # сбор истории
+    try:
+        with open('report_history.txt') as f:
+            history = json.load(f)
+    except:
+        history = {}  # сбор истории
 
     account = balance
+    addmoney = 0
 
     check_lst = [str(i + 1) for i in range(len(main_menu))]  # для получения индекса меню
     start = input(appeals[1] + ', ' + appeals[2])
@@ -60,14 +77,14 @@ def privite_account():
                 check_form_1 = False
                 while not check_form_1:
                     addmoney = input(appeals[4])
-                   # output.clear()
+                    # output.clear()
                     print()
                     try:
-                        if float(addmoney):
-                            check_form_1 = True  # выход если верноo
-                        else:
+                        if not float(addmoney):
                             print(answers[2])
                             print()
+                        else:
+                            check_form_1 = True  # выход если верно
 
                     except:
                         print(answers[2])
@@ -75,7 +92,8 @@ def privite_account():
 
                 # output.clear()
                 account += float(addmoney)
-                hist = {'Пополнение счета: ': float(addmoney)}
+                curtime = cur_time(time.time())
+                hist = {curtime + ' # Пополнение счета: ': float(addmoney)}
                 history.update(hist)
                 print('Пополнение счета', 'Ваш текущий остаток ' + str(account), sep='\n')
                 print()
@@ -91,8 +109,10 @@ def privite_account():
                             # check_form = True # выход если верно
                             buy = input(appeals[6])
                             # output.clear()
+                            curtime = cur_time(time.time())
                             account -= reducemoney
-                            hist = {buy: reducemoney}
+                            hist = {curtime + ' # ' + buy: reducemoney}
+                            # hist = {buy: reducemoney}
                             history.update(hist)
                             # print(history)
                             check_form_2 = True  # выход если верно
@@ -112,20 +132,21 @@ def privite_account():
                 print('ИСТОРИЯ ДЕЙСТВИЙ:')
                 print('Входящий остаток ' + str(balance), sep='\n')
                 for key, value in history.items():
-                    if key == 'Пополнение счета: ':
+
+                    if key.split('# ')[1] == 'Пополнение счета: ':
                         print(key, value)
                     else:
-                        print('Покупка: ' + key, value)
+                        print(key.split('# ')[0] + 'Покупка: ' + key.split('# ')[1], value)
                 print('--------------------')
                 print('Ваш текущий остаток ' + str(account), sep='\n')
                 print()
                 # output.clear()
 
-                account += int(addmoney)
-                hist = {'Пополнение счета: ': int(addmoney)}
-                history.update(hist)
-
             if int(step_1) == 4:  # если выход
+                with open('report_account.txt', 'w') as f:
+                    json.dump(account, f)
+                with open('report_history.txt', 'w') as f:
+                    json.dump(history, f)
                 print(answers[3])
                 work = False
 
