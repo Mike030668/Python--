@@ -1,6 +1,6 @@
 import time
 import numpy as np
-import sys
+
 
 # декоратор
 def split_sings(f):
