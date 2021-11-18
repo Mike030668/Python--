@@ -12,7 +12,13 @@ class DataSpace:
     def __init__(self, data: object):
         self.data = data
 
-    # вывод
+    # Уничтожение созданных классов
+    def __del__(self):
+        class_name = self.__class__.__name__
+        print('{} уничтожен'.format(class_name))
+
+
+        # вывод
     def __str__(self):
         return f'Данные: ({self.data})'
 

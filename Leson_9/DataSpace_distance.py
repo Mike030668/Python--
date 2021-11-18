@@ -11,7 +11,7 @@ class Distance_Spaces(DataSpace):
     """
     # инициализации
     def __init__(self, data: object):
-        self.data = data
+        DataSpace.__init__(self, data)
 
     def cosin_distance(self, checked_data):
         distance = []

@@ -62,9 +62,9 @@ class Distance_Datas(DataSpace):
         distance_max = max(distance)
         distance_min = min(distance)
         if distance_min > own_min and distance_max < own_max:
-            return print(f'Данные {(distance_min, distance_max)} из контрольной области {(own_min, own_max)}')
+            return print(f'Данные {(distance_min, distance_max)} из контрольной области {(own_min, own_max)} на основе {self.type_dist}')
         else:
-            return print(f'Данные {(distance_min, distance_max)} вне контрольной области {(own_min, own_max)}')
+            return print(f'Данные {(distance_min, distance_max)} вне контрольной области {(own_min, own_max)} на основе {self.type_dist}')
 
 
 control_data = np.random.random(size=(10, 7))
