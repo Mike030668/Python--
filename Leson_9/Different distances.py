@@ -80,6 +80,10 @@ if __name__ == '__main__':
 
     own_data_cos = Distance_Datas(control_data, 'cos_dis')
     print(own_data_cos)
-
-    # print()
-    # own_data.distance_spaces(checked_data)
+    print()
+    own_data_cos.distance_spaces(checked_data)
+    print()
+    own_data_euc = Distance_Datas(control_data, 'euclid_dis')
+    print(own_data_euc)
+    print()
+    own_data_euc.distance_spaces(checked_data)

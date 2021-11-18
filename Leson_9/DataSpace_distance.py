@@ -36,12 +36,11 @@ class Distance_Spaces(DataSpace):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    #control_data = np.random.random(size=(10, 7))
-   # checked_data = np.random.binomial(2, 0.7, size=(20, 7))
-
-    #own_data = Distance_Spaces(control_data)
+    control_data = np.random.random(size=(10, 7))
+    checked_data = np.random.binomial(2, 0.7, size=(20, 7))
+    own_data = Distance_Spaces(control_data)
     print()
-   # print(own_data)
+    print(own_data)
     print()
-   # own_data.distance_spaces(checked_data)
+    own_data.distance_spaces(checked_data)
 #
