@@ -1,5 +1,6 @@
-import DataSpace
-from scipy.spatial.distance import euclidean
+from DataSpace import DataSpace
+import numpy as np
+from scipy.spatial.distance import euclidean, cosine
 
 
 class Distance_Datas(DataSpace):

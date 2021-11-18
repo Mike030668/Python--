@@ -1,5 +1,6 @@
-import DataSpace
-
+from DataSpace import DataSpace
+import numpy as np
+from scipy.spatial.distance import cosine
 
 class Distance_Spaces(DataSpace):
     """
@@ -9,9 +10,6 @@ class Distance_Spaces(DataSpace):
     data: данные
     checked_data : внешние данные
     """
-    # инициализации
-    def __init__(self, data: object):
-        DataSpace.__init__(self, data)
 
     def cosin_distance(self, checked_data):
         distance = []

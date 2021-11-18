@@ -39,3 +39,7 @@ if __name__ == '__main__':
     print(own_data)
     print()
     print(own_data.owncosin_space())
+
+
+def __init__(self, data):
+    return None
