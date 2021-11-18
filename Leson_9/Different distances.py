@@ -27,9 +27,9 @@ class Distance_Datas(DataSpace):
 
     @property
     def distance(self):
-        if self.type_dist == 'cos':
+        if self.type_dist == 'cos_dis':
             return self.owncosin_space(self, checked_data)
-        elif self.type_dist == 'euclid':
+        elif self.type_dist == 'euclid_dis':
             return self.own_euclid_space(self, checked_data)
         else:
             print(f"Введите 'cos_dis' или 'euclid_dis'")
