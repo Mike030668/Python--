@@ -1,7 +1,7 @@
 import random
 import numpy as np
 import pandas as pd
-from BaseFool import Durack
+from BaseFool import Durack, Make_game, Razdaza, Make_players
 
 """
 Количество карт, людей и роботов уже задано

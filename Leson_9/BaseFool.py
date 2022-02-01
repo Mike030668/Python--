@@ -158,7 +158,7 @@ class Make_players:
         return players, cards4plaer
 
 
-class Razdaza():
+class Razdaza:
 
     def __init__(self,
                  playcoloda,
