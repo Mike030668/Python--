@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 
-class Make_players():
+class Make_players:
     def __init__(self,
                  cards4plaer,
                  humans,
@@ -29,9 +29,10 @@ class Make_players():
         self.START_pole = startpole
 
     def __call__(self):
-        players = self.maker_players()
-        return players
+        players, cards4plaer = self.maker_players()
+        return players, cards4plaer
 
+    @property
     def opros(self):
         """
         Функция опросом устанавливает
@@ -48,7 +49,8 @@ class Make_players():
             if not self.CARDS_4PLAYER:
                 try:
                     self.CARDS_4PLAYER = int(input(
-                        f"Укажите количество карт выдаваемых на руки от {self.MINCARDS_4PLAER} до {self.MAXCARDS_4PLAER} включительно: "))
+                        f"Укажите количество карт выдаваемых на руки от {self.MINCARDS_4PLAER}\ "
+                        f"до {self.MAXCARDS_4PLAER} включительно: "))
                 except:
                     print("Ошибка, укажите число карт")
                     pass
@@ -59,7 +61,7 @@ class Make_players():
                     pass
 
             # проверка на вхождение в диапазон rfhn
-            if self.CARDS_4PLAYER >= self.MINCARDS_4PLAER and self.CARDS_4PLAYER <= self.MAXCARDS_4PLAER:
+            if self.MINCARDS_4PLAER <= self.CARDS_4PLAYER <= self.MAXCARDS_4PLAER:
                 err_cards = False
             else:
                 pass
@@ -72,7 +74,8 @@ class Make_players():
             # определение self.humans
             while err_h:
                 print(
-                    f"Количество участников (роботы и люди) должно быть в сумме не менее {self.MIN_PLAYERS} и не более {self.MAX_PLAYERS}")
+                    f"Количество участников (роботы и люди) должно быть в сумме не менее {self.MIN_PLAYERS} \
+                    и не более {self.MAX_PLAYERS}")
                 if not self.humans and self.humans != 0:  # если self.humans не зздан ранее
                     try:
                         self.humans = int(input('Введите количество игроков людей: '))
@@ -111,7 +114,8 @@ class Make_players():
                 if self.humans + self.robots > self.MAX_PLAYERS \
                         or self.humans + self.robots < self.MIN_PLAYERS:  # если не в диапозоне
                     print(
-                        f'Ошибка, указано суммарное количество игроков не в диапазоне {self.MIN_PLAYERS} - {self.MAX_PLAYERS}')
+                        f'Ошибка, указано суммарное количество игроков не в диапазоне {self.MIN_PLAYERS} \
+                        - {self.MAX_PLAYERS}')
                     print()
                     err_h = True  # сброс
                     err_r = True  # сброс
@@ -121,7 +125,7 @@ class Make_players():
                 else:
                     pass  # выход
 
-        return self.humans, self.robots
+        return self.humans, self.robots, self.CARDS_4PLAYER
 
     def make_player(self, robot=True, number=0):
         """
@@ -142,7 +146,7 @@ class Make_players():
         """
         Функция создает список игроков players
         """
-        hum, rob = self.opros()
+        hum, rob, cards4plaer = self.opros
         players = []
         if rob:
             for i in range(rob):
@@ -151,7 +155,7 @@ class Make_players():
             for _ in range(hum):
                 print(f'Игрок {_ + 1}:')
                 players.append(self.make_player(robot=False))
-        return players
+        return players, cards4plaer
 
 
 class Razdaza():
@@ -273,7 +277,7 @@ class Razdaza():
         return players, self.PLAY
 
 
-class Make_game():
+class Make_game:
     def __init__(self,
                  card4plaer,
                  musty,
@@ -585,6 +589,9 @@ class Make_game():
         Функция запускает игры
         """
         qty_players = len(players)
+
+        # считываем количество розданных карт
+        self.CARDS_4PLAYER = (players[0] != 0).sum().sum()
         cickle = 1
         fin = 0
         play = True
@@ -650,15 +657,16 @@ class Make_game():
         for player in players:
             print(player.name)
             print(player.head(10).to_string())
-            #display(df)
+            # display(df)
             print()
 
         print('Проверяем остальное')
         for df in df_list:
             print(df.name)
             print(df.head(10).to_string())
-            #display(df)
+            # display(df)
             print()
+
 
 class Durack():
     def __init__(self,
@@ -742,8 +750,8 @@ class Durack():
                                      self.__QQUANTY_COLODA,
                                      self.__START_pole
                                      )
-        # создаем игпоков
-        players = maker_players()
+        # создаем игпоков, и карт для выдачи обновленное
+        players, self.__CARDS_4PLAYER = maker_players()
         print()
         print("Расcаживаем игроков в случайном порядке")
         random.shuffle(players)
@@ -779,10 +787,10 @@ class Durack():
 
         return players, PLAY_coloda, kozir
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     # Инициализация игры
-    game = Durack(card4plaer=3, humans=0, robots=3)
+    game = Durack(card4plaer= 0, humans=0, robots=3)
     gaimers, playcoloda, kozir = game.init_game()
 
     # Запуск игрового цикла
