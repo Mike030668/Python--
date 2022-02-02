@@ -46,7 +46,7 @@ class Make_players:
 
         # определение CARDS_4PLAYER
         while err_cards:
-            if not self.CARDS_4PLAYER and self.CARDS_4PLAYER is not None:
+            if not self.CARDS_4PLAYER: # and self.CARDS_4PLAYER is not None:
                 try:
                     self.CARDS_4PLAYER = int(input(
                         f"Укажите количество карт выдаваемых на руки от {self.MINCARDS_4PLAER} до {self.MAXCARDS_4PLAER} включительно: "))
@@ -62,7 +62,8 @@ class Make_players:
                     pass
 
             # проверка на вхождение в диапазон
-            if self.MINCARDS_4PLAER <= self.CARDS_4PLAYER <= self.MAXCARDS_4PLAER:
+            if self.CARDS_4PLAYER is not None \
+                    and self.MINCARDS_4PLAER <= self.CARDS_4PLAYER <= self.MAXCARDS_4PLAER:
                 err_cards = False
             else:
                 pass
@@ -790,7 +791,7 @@ class Durack():
 
 if __name__ == '__main__':
     # Инициализация игры
-    game = Durack(card4plaer=0, humans=0, robots=3)
+    game = Durack()
     players, playcoloda, kozir = game.init_game()
 
     # Запуск игрового цикла
