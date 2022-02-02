@@ -49,7 +49,7 @@ class Make_players:
             if not self.CARDS_4PLAYER:
                 try:
                     self.CARDS_4PLAYER = int(input(
-                        f"Укажите количество карт выдаваемых на руки от {self.MINCARDS_4PLAER}\ "
+                        f"Укажите количество карт выдаваемых на руки от {self.MINCARDS_4PLAER}"
                         f"до {self.MAXCARDS_4PLAER} включительно: "))
                 except:
                     print("Ошибка, укажите число карт")
