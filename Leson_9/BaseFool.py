@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import pandas as pd
+import self as self
 
 
 class Make_players:
@@ -46,10 +47,16 @@ class Make_players:
 
         # определение CARDS_4PLAYER
         while err_cards:
-            if not self.CARDS_4PLAYER: # and self.CARDS_4PLAYER is not None:
+            if not self.CARDS_4PLAYER:  # and self.CARDS_4PLAYER is not None:
                 try:
                     self.CARDS_4PLAYER = int(input(
                         f"Укажите количество карт выдаваемых на руки от {self.MINCARDS_4PLAER} до {self.MAXCARDS_4PLAER} включительно: "))
+                    # проверка на вхождение в диапазон
+                    if self.CARDS_4PLAYER is not None \
+                            and self.MINCARDS_4PLAER <= self.CARDS_4PLAYER <= self.MAXCARDS_4PLAER:
+                        err_cards = False
+                    # else:
+                    # pass
                 except:
                     print("Ошибка, укажите число карт")
                     pass
@@ -61,12 +68,7 @@ class Make_players:
                     self.CARDS_4PLAYER = None
                     pass
 
-            # проверка на вхождение в диапазон
-            if self.CARDS_4PLAYER is not None \
-                    and self.MINCARDS_4PLAER <= self.CARDS_4PLAYER <= self.MAXCARDS_4PLAER:
-                err_cards = False
-            else:
-                pass
+
 
         # определение MAX_PLAYERS
         self.MAX_PLAYERS = self.QQUANTY_COLODA // self.CARDS_4PLAYER
@@ -74,24 +76,25 @@ class Make_players:
 
         if (not self.humans and self.humans != 0) or not (self.robots and self.robots != 0):
             # определение self.humans
-            while err_h:
+            while err_h and err_r:
                 print(
                     f"Количество участников (роботы и люди) должно быть в сумме не менее {self.MIN_PLAYERS} и не более {self.MAX_PLAYERS}")
-                if not self.humans and self.humans != 0:  # если self.humans не зздан ранее
-                    try:
-                        self.humans = int(input('Введите количество игроков людей: '))
-                        err_h = False  # выход
-                    except:
-                        print("Ошибка, укажите число человек")
-                        pass
-                else:  # если self.humans зздан то проверка
-                    if type(self.humans) == int:  # если self.humans число
-                        print(f'Количество людей уже задано - {self.humans}')
-                        err_h = False  # выход
+                while err_h:
+                    if not self.humans and self.humans != 0:  # если self.humans не зздан ранее
+                        try:
+                            self.humans = int(input('Введите количество игроков людей: '))
+                            err_h = False  # выход
+                        except:
+                            print("Ошибка, укажите число человек")
+                            pass
+                    else:  # если self.humans зздан то проверка
+                        if type(self.humans) == int:  # если self.humans число
+                            print(f'Количество людей уже задано - {self.humans}')
+                            err_h = False  # выход
 
-                    else:  # если self.humans не число
-                        print("Ошибка, укажите число человек")
-                        self.humans = None  # сброс self.humans
+                        else:  # если self.humans не число
+                            print("Ошибка, укажите число человек")
+                            self.humans = None  # сброс self.humans
 
                 # определение self.robots
                 if not self.robots and self.robots != 0:  # если self.robots не зздан ранее
@@ -304,6 +307,7 @@ class Make_game:
         self.POLE_IGRY = self.START_pole.copy().astype(int)
         self.BITA.name = 'Бита'
         self.POLE_IGRY.name = 'Игровое поле'
+        self.PLAY = True
 
     def __call__(self, players: object, playcoloda: object, kozir: object) -> object:
         self.go_game(players, playcoloda, kozir)
@@ -395,10 +399,10 @@ class Make_game:
         available = self.show_cards(vibor, False)
 
         # просим сделать шаг
-        while try_card:
+        while try_card and schet < attempt+1:
             print(f'Игрок {player.name}, ваш ход, у вас {attempt - schet + 1} попыток')
             step = input('Введите номер карты или пробел для пропуска хода: ')
-            if step == ' ' or schet > attempt:  # пропуск хода
+            if step == ' ': # or schet > attempt:  # пропуск хода
                 try_card = False
                 return step, step
             # команда для сброса игры
@@ -406,7 +410,6 @@ class Make_game:
                 print(f'Игрок {player.name} остановил игру')
                 try_card = False
                 self.PLAY = False
-
                 return ' ', ' '
             else:
                 try:
@@ -420,10 +423,10 @@ class Make_game:
                     print(f'{player.name} нужен номер карты или пробел для пропуска хода, внимательнее')
                     schet += 1
                     pass
-                    # выбор для простого хода
-            [step_musty, step_typecards, _] = for_choose[step - 1]
+
+            # выбор для простого хода
             # если все же ответ, то корректируем на основе value_card
-            if value_card and not try_card:
+            if not try_card:
                 if vibor.sum().sum() == 0:
                     print(f'{player.name} к сожалению у Вас нет варианта для хода')
                     return ' ', ' '
@@ -435,9 +438,13 @@ class Make_game:
                     if hod in available:
                         print(f'{player.name} ваш ход {step_musty} {step_typecards} принят')
                         try_card = False
+                        return step_musty, step_typecards
                     else:
                         try_card = True
-            return step_musty, step_typecards
+            else:
+                pass
+        print(f'{player.name} Вы исчерпали свои {attempt + 1} попытки')
+        return ' ', ' '
 
     ##############################################################################
 
@@ -595,7 +602,7 @@ class Make_game:
         self.CARDS_4PLAYER = (players[0] != 0).sum().sum()
         cickle = 1
         fin = 0
-        play = True
+        self.PLAY = True
         self.KOZIR = kozir
         self.PLAY_coloda = playcoloda
         # передаем текущий козырь для контроля инварианта игры
@@ -604,10 +611,10 @@ class Make_game:
         df_list = [self.BITA, self.PLAY_coloda, self.POLE_IGRY]
         state_players = self.make_states(players)
 
-        while play:
+        while self.PLAY:
             print('cickle ', cickle)
             step = 0
-            while step < qty_players and play:
+            while step < qty_players and self.PLAY:
                 if fin: fin += 1  # для полного выходя из всех циклов в конце текущего
                 # проверяем ход или ответ
                 if self.POLE_IGRY.sum().sum() == 0:
@@ -627,7 +634,7 @@ class Make_game:
                                          self.START_coloda)
                 # выдача карт игроку если нужно
                 if (players[step] != 0).sum().sum() < self.CARDS_4PLAYER:
-                    players, play = razdacha_cards(players)
+                    players, self.PLAY = razdacha_cards(players)
 
                 # регистрируем если кто окончил игру
                 if sum(state_players[:, 1]) == 1:
