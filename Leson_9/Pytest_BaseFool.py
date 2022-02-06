@@ -15,9 +15,13 @@ class TestFool:
         var = type(self.kozir) == str
         var = type(self.players) == list
         var = type(self.playcoloda) == object
-        print('Test completed!')
+        print('Test init_game completed!')
+        print()
+        self.game.go_game(self.players, self.playcoloda, self.kozir)
+        print('Test game completed!')
 
     def test_init(self):
         assert self.game.CARDS_4PLAYER == 6
         assert self.game.humans == 0
         assert self.game.robots == 4
+
