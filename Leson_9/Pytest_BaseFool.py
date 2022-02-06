@@ -1,5 +1,5 @@
 import pytest
-from BaseFool import Durack, Make_players
+from BaseFool import Durack
 
 class TestFool:
 
