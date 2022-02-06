@@ -6,6 +6,8 @@ class TestFool:
     def setup(self):
         self.game = Durack(card4plaer=6, humans=0, robots=4)
         self.kozir = None
+        self.game.players = None
+        self.game.playcoloda = None
         print('Start test!')
 
     def teardown(self):
