@@ -1,7 +1,6 @@
 import random
 import numpy as np
 import pandas as pd
-import self as self
 
 
 class Make_players:
@@ -67,7 +66,8 @@ class Make_players:
                     print("Ошибка, укажите число карт")
                     self.CARDS_4PLAYER = None
                     pass
-
+                else:
+                    err_cards = False
 
 
         # определение MAX_PLAYERS
@@ -118,8 +118,7 @@ class Make_players:
                 if self.humans + self.robots > self.MAX_PLAYERS \
                         or self.humans + self.robots < self.MIN_PLAYERS:  # если не в диапозоне
                     print(
-                        f'Ошибка, указано суммарное количество игроков не в диапазоне {self.MIN_PLAYERS} \
-                        - {self.MAX_PLAYERS}')
+                        f'Ошибка, указано суммарное количество игроков не в диапазоне {self.MIN_PLAYERS} - {self.MAX_PLAYERS}')
                     print()
                     err_h = True  # сброс
                     err_r = True  # сброс
@@ -798,7 +797,7 @@ class Durack():
 
 if __name__ == '__main__':
     # Инициализация игры
-    game = Durack()
+    game = Durack(3,0,3)
     players, playcoloda, kozir = game.init_game()
 
     # Запуск игрового цикла
