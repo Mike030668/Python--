@@ -710,9 +710,9 @@ class Durack():
         Если в игре есть игроки люди, до отвечать на вопросы в игре
         """
 
-        self.__humans = humans
-        self.__robots = robots
-        self.__CARDS_4PLAYER = card4plaer
+        self.humans = humans
+        self.robots = robots
+        self.CARDS_4PLAYER = card4plaer
         self.__MUSTY = ['Черви', 'Пики', 'Крести', 'Буби']
         self.__DIC_CARDS = {'6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Валет': 11,
                             "Дама": 12, 'Король': 13, 'Туз': 14}
@@ -735,7 +735,7 @@ class Durack():
         self.__MIN_PLAYERS = 2
 
         # создание метода запуска игрыв с текущими значениями игры
-        self.go_game = Make_game(self.__CARDS_4PLAYER,
+        self.go_game = Make_game(self.CARDS_4PLAYER,
                                  self.__MUSTY,
                                  self.__TYPECARD_KEYS,
                                  self.__IDX_MUSTY,
@@ -748,9 +748,9 @@ class Durack():
         Функция инициализации игры
         """
         # создание метода создания игроков с текущими значениями игры
-        maker_players = Make_players(self.__CARDS_4PLAYER,
-                                     self.__humans,
-                                     self.__robots,
+        maker_players = Make_players(self.CARDS_4PLAYER,
+                                     self.humans,
+                                     self.robots,
                                      self.__MINCARDS_4PLAER,
                                      self.__MAXCARDS_4PLAER,
                                      self.__MIN_PLAYERS,
@@ -758,7 +758,7 @@ class Durack():
                                      self.__START_pole
                                      )
         # создаем игпоков, и карт для выдачи обновленное
-        players, self.__CARDS_4PLAYER = maker_players()
+        players, self.CARDS_4PLAYER = maker_players()
         print()
         print("Расcаживаем игроков в случайном порядке")
         random.shuffle(players)
@@ -781,7 +781,7 @@ class Durack():
 
         # создание метода раздачи карт с текущими значениями игры
         razdacha_cards = Razdaza(PLAY_coloda,
-                                 self.__CARDS_4PLAYER,
+                                 self.CARDS_4PLAYER,
                                  POLE_IGRY,
                                  BITA,
                                  START_coloda)
