@@ -1,8 +1,8 @@
 import pytest
 from BaseFool import Durack
 
-class TestFool:
 
+class TestFool:
     def setup(self):
         self.game = Durack(card4plaer=6, humans=2, robots=3)
         self.players, self.playcoloda, self.kozir = self.game.init_game()
