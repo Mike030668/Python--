@@ -142,7 +142,8 @@ class Make_players:
             style = random.choice(('min', 'rand'))
             player.name = f'Robot_{number}({style})'
         else:
-            player.name = input('Введите имя человека: ').title()
+            player.name = f'Human_{random.randint(1,6)}'# для тестов
+            # player.name = input('Введите имя человека: ').title() # для тестов закомментировано
         return player
 
     def maker_players(self):
