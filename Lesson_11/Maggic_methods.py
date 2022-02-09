@@ -57,7 +57,7 @@ print(f'Проверка равенства объектов класса {np.ze
 del (own_data, data_1, data_2, new_data)
 print()
 
-print('Создаем серию объектов класса на основе списка методом классса')
+print('Создаем серию объектов класса на основе списка методом класса')
 datas = (np.random.uniform(1, 3, size=(3, 3)) for _ in range(5))
 cls_lst = Dist_cos.makeobject(datas)
 for cls in cls_lst:
