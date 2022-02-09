@@ -97,8 +97,6 @@ class Dist_cos:
         :param somedata_1, somedata_2: массивы численных данных
         :return: возвращаем массив кос_расстояний между массивами
         """
-        #somedata_1 = self.__checktype__(somedata_1)
-        #somedata_2 = self.__checktype__(somedata_2)
         distance = []
         for i in range(somedata_1.shape[0]):
             for j in range(somedata_2.shape[0]):
