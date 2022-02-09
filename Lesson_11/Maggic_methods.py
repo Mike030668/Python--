@@ -1,6 +1,9 @@
 import numpy as np
 from Data_cosdistance import Dist_cos
 
+# https://habr.com/ru/post/186608/
+
+
 control_data = np.random.random(size=(3, 3))
 checked_data_1 = np.random.uniform(1, 3, size=(3, 3))
 checked_data_2 = np.random.beta(2, 7, size=(3, 3))
@@ -52,3 +55,10 @@ print(f'Сравнение объектов класса {np.ones((3, 3)) * 5 > 
 print(f'Проверка равенства объектов класса {np.zeros((3, 3)) < data_2}')
 
 del (own_data, data_1, data_2, new_data)
+print()
+
+print('Создаем серию объектов класса на основе списка методом классса')
+datas = (np.random.uniform(1, 3, size=(3, 3)) for _ in range(5))
+cls_lst = Dist_cos.makeobject(datas)
+for cls in cls_lst:
+    print(cls)

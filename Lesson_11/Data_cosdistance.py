@@ -69,6 +69,12 @@ class Dist_cos:
         if distance_min >= own_max: return True
         else: return False
 
+    def __getstate__(self):
+        return self.data
+
+    def __setstate__(self, state):
+        self.data = state
+
     def __checktype__(self, other):
         if type(other) == int or type(other) == float:
             raise TypeError('Должен быть или объект самого класса или нампи или список')
@@ -91,6 +97,8 @@ class Dist_cos:
         :param somedata_1, somedata_2: массивы численных данных
         :return: возвращаем массив кос_расстояний между массивами
         """
+        #somedata_1 = self.__checktype__(somedata_1)
+        #somedata_2 = self.__checktype__(somedata_2)
         distance = []
         for i in range(somedata_1.shape[0]):
             for j in range(somedata_2.shape[0]):
@@ -122,6 +130,22 @@ class Dist_cos:
             print(f'Данные {(distance_min, distance_max)} из контрольной области {(own_min, own_max)}')
         else:
             print(f'Данные {(distance_min, distance_max)} вне контрольной области {(own_min, own_max)}')
+
+    @staticmethod
+    def stat_method():
+
+        pass
+
+    @classmethod
+    def makeobject(cls, list_data):
+        """
+        :param list_data: list данных для создаваемых объектов класса
+        :return: возвращаем список объектов класса
+        """
+        list_cls = []
+        for data in list_data:
+            list_cls.append(cls(data))
+        return list_cls
 
 
 # Press the green button in the gutter to run the script.
