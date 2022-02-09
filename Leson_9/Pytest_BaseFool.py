@@ -35,7 +35,7 @@ class TestFool:
         print('_______________________')
 
     def test_game(self):
-        # меняняем имена игроков на роботов для ухода от input() при тесте игры
+        # меняем имена игроков на роботов для ухода от input() при тесте игры
         for number, player in enumerate(self.players):
             player.name = f'Robot_{number}(min)'
         self.game.go_game(self.players, self.playcoloda, self.kozir)
